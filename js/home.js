@@ -10,18 +10,18 @@
     function createItemCard(item) {
         var card = document.createElement('div');
         card.className = 'grocery-item';
-        card.innerHTML = '
-            <div class="item-main">\n'
-            + '  <div class="item-title">' + item.name + '</div>\n'
-            + '  <div class="item-meta">' + item.quantity + ' ' + item.unit + ' • ' + item.category + '</div>\n'
-            + '</div>\n'
-            + '<div class="item-right">\n'
-            + '  <div class="item-price">$' + (Number(item.price || 0).toFixed(2)) + '</div>\n'
-            + '  <div class="item-actions">\n'
-            + '    <button class="btn btn-small btn-outline edit">Edit</button>\n'
-            + '    <button class="btn btn-small btn-danger delete">Delete</button>\n'
-            + '  </div>\n'
-            + '</div>';
+        card.innerHTML = `
+            <div class="item-main">
+                <div class="item-title">${item.name}</div>
+                <div class="item-meta">${item.quantity} ${item.unit} • ${item.category}</div>
+            </div>
+            <div class="item-right">
+                <div class="item-price">$${Number(item.price || 0).toFixed(2)}</div>
+                <div class="item-actions">
+                    <button class="btn btn-small btn-outline edit">Edit</button>
+                    <button class="btn btn-small btn-danger delete">Delete</button>
+                </div>
+            </div>`;
 
         card.querySelector('.edit').addEventListener('click', function () {
             Modal.open(item);
