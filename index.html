@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grocery Management System</title>
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/navigation.css" />
+    <link rel="stylesheet" href="css/home.css" />
+    <link rel="stylesheet" href="css/item-details.css" />
+    <link rel="stylesheet" href="css/sales.css" />
+    <link rel="stylesheet" href="css/modal.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="nav-brand">
+          <i class="fas fa-shopping-cart"></i>
+          <span>Grocery Manager</span>
+        </div>
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="#" class="nav-link active" data-page="home">
+              <i class="fas fa-home"></i> Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link" data-page="item-details">
+              <i class="fas fa-info-circle"></i> Item Details
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link" data-page="sales">
+              <i class="fas fa-tags"></i> Sales & Offers
+            </a>
+          </li>
+        </ul>
+        <div class="nav-toggle">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <div class="main-container">
+      <!-- Home Page -->
+      <div id="home-page" class="page active">
+        <div class="page-header">
+          <h1>Grocery List Management</h1>
+          <p>Add, edit, and manage your grocery items</p>
+        </div>
+
+        <!-- Add Item Form -->
+        <div class="form-section">
+          <h2>Add New Item</h2>
+          <form id="groceryForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="itemName">Item Name:</label>
+                <input
+                  type="text"
+                  id="itemName"
+                  name="itemName"
+                  required
+                  placeholder="e.g., Apples"
+                  list="itemNameList"
+                />
+                <datalist id="itemNameList"></datalist>
+              </div>
+              <div class="form-group">
+                <label for="itemCategory">Category:</label>
+                <select id="itemCategory" name="itemCategory" required>
+                  <option value="">Select Category</option>
+                  <option value="Fruits">Fruits</option>
+                  <option value="Vegetables">Vegetables</option>
+                  <option value="Dairy">Dairy</option>
+                  <option value="Meat">Meat</option>
+                  <option value="Bakery">Bakery</option>
+                  <option value="Pantry">Pantry</option>
+                  <option value="Beverages">Beverages</option>
+                  <option value="Snacks">Snacks</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="itemQuantity">Quantity:</label>
+                <input
+                  type="number"
+                  id="itemQuantity"
+                  name="itemQuantity"
+                  min="1"
+                  required
+                  placeholder="1"
+                />
+              </div>
+              <div class="form-group">
+                <label for="itemUnit">Unit:</label>
+                <select id="itemUnit" name="itemUnit" required>
+                  <option value="">Select Unit</option>
+                  <option value="kg">kg</option>
+                  <option value="g">g</option>
+                  <option value="lb">lb</option>
+                  <option value="oz">oz</option>
+                  <option value="pieces">pieces</option>
+                  <option value="liters">liters</option>
+                  <option value="ml">ml</option>
+                  <option value="dozen">dozen</option>
+                  <option value="pack">pack</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="itemPrice">Price ($):</label>
+                <input
+                  type="number"
+                  id="itemPrice"
+                  name="itemPrice"
+                  min="0"
+                  step="0.01"
+                  placeholder="0.00"
+                />
+              </div>
+              <div class="form-group">
+                <label for="itemNotes">Notes:</label>
+                <input
+                  type="text"
+                  id="itemNotes"
+                  name="itemNotes"
+                  placeholder="Any additional notes..."
+                />
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Add Item
+              </button>
+              <button type="button" id="clearForm" class="btn btn-secondary">
+                <i class="fas fa-eraser"></i> Clear
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Search and Filter Section -->
+        <div class="search-section">
+          <h2>Search & Filter</h2>
+          <div class="search-controls">
+            <div class="search-group">
+              <input
+                type="text"
+                id="searchInput"
+                placeholder="Search items..."
+              />
+              <i class="fas fa-search"></i>
+            </div>
+            <div class="filter-group">
+              <select id="categoryFilter">
+                <option value="">All Categories</option>
+                <option value="Fruits">Fruits</option>
+                <option value="Vegetables">Vegetables</option>
+                <option value="Dairy">Dairy</option>
+                <option value="Meat">Meat</option>
+                <option value="Bakery">Bakery</option>
+                <option value="Pantry">Pantry</option>
+                <option value="Beverages">Beverages</option>
+                <option value="Snacks">Snacks</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <button id="clearFilters" class="btn btn-outline">
+              <i class="fas fa-times"></i> Clear Filters
+            </button>
+          </div>
+        </div>
+
+        <!-- Grocery List Section -->
+        <div class="list-section">
+          <div class="list-header">
+            <h2>Grocery List</h2>
+            <div class="list-stats">
+              <span id="totalItems">Total Items: 0</span>
+              <span id="totalValue">Total Value: $0.00</span>
+            </div>
+          </div>
+
+          <div id="groceryList" class="grocery-list">
+            <div class="empty-state">
+              <i class="fas fa-shopping-basket"></i>
+              <p>No items in your grocery list yet!</p>
+              <p>Add some items to get started.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item Details Page -->
+      <div id="item-details-page" class="page">
+        <div class="page-header">
+          <h1>Item Details</h1>
+          <p>View detailed information about your grocery items</p>
+        </div>
+
+        <div class="details-container">
+          <div class="details-sidebar">
+            <h3>Categories</h3>
+            <div id="categoryList" class="category-list">
+              <!-- Categories will be populated by JavaScript -->
+            </div>
+          </div>
+
+          <div class="details-main">
+            <div id="itemDetailsContent" class="item-details-content">
+              <div class="empty-state">
+                <i class="fas fa-info-circle"></i>
+                <p>Select a category to view item details</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sales & Offers Page -->
+      <div id="sales-page" class="page">
+        <div class="page-header">
+          <h1>Sales & Offers</h1>
+          <p>Manage discounts and special offers for your items</p>
+        </div>
+
+        <div class="sales-container">
+          <div class="sales-form-section">
+            <h2>Add New Offer</h2>
+            <form id="offerForm">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="offerItem">Select Item:</label>
+                  <select id="offerItem" name="offerItem" required>
+                    <option value="">Select an item</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="offerType">Offer Type:</label>
+                  <select id="offerType" name="offerType" required>
+                    <option value="">Select Type</option>
+                    <option value="percentage">Percentage Discount</option>
+                    <option value="fixed">Fixed Amount Off</option>
+                    <option value="buy-x-get-y">Buy X Get Y</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="offerValue">Discount Value:</label>
+                  <input
+                    type="number"
+                    id="offerValue"
+                    name="offerValue"
+                    min="0"
+                    step="0.01"
+                    placeholder="0.00"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="offerStartDate">Start Date:</label>
+                  <input
+                    type="date"
+                    id="offerStartDate"
+                    name="offerStartDate"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="offerEndDate">End Date:</label>
+                  <input
+                    type="date"
+                    id="offerEndDate"
+                    name="offerEndDate"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="offerDescription">Description:</label>
+                  <input
+                    type="text"
+                    id="offerDescription"
+                    name="offerDescription"
+                    placeholder="Special offer description..."
+                  />
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-tag"></i> Add Offer
+                </button>
+                <button
+                  type="button"
+                  id="clearOfferForm"
+                  class="btn btn-secondary"
+                >
+                  <i class="fas fa-eraser"></i> Clear
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div class="offers-list-section">
+            <h2>Current Offers</h2>
+            <div id="offersList" class="offers-list">
+              <div class="empty-state">
+                <i class="fas fa-tags"></i>
+                <p>No offers available yet!</p>
+                <p>Add some offers to get started.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Item Modal -->
+    <div id="editModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Edit Item</h3>
+          <span class="close">&times;</span>
+        </div>
+        <form id="editForm">
+          <input type="hidden" id="editId" />
+          <div class="form-row">
+            <div class="form-group">
+              <label for="editItemName">Item Name:</label>
+              <input type="text" id="editItemName" required />
+            </div>
+            <div class="form-group">
+              <label for="editItemCategory">Category:</label>
+              <select id="editItemCategory" required>
+                <option value="Fruits">Fruits</option>
+                <option value="Vegetables">Vegetables</option>
+                <option value="Dairy">Dairy</option>
+                <option value="Meat">Meat</option>
+                <option value="Bakery">Bakery</option>
+                <option value="Pantry">Pantry</option>
+                <option value="Beverages">Beverages</option>
+                <option value="Snacks">Snacks</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="editItemQuantity">Quantity:</label>
+              <input type="number" id="editItemQuantity" min="1" required />
+            </div>
+            <div class="form-group">
+              <label for="editItemUnit">Unit:</label>
+              <select id="editItemUnit" required>
+                <option value="kg">kg</option>
+                <option value="g">g</option>
+                <option value="lb">lb</option>
+                <option value="oz">oz</option>
+                <option value="pieces">pieces</option>
+                <option value="liters">liters</option>
+                <option value="ml">ml</option>
+                <option value="dozen">dozen</option>
+                <option value="pack">pack</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="editItemPrice">Price ($):</label>
+              <input type="number" id="editItemPrice" min="0" step="0.01" />
+            </div>
+            <div class="form-group">
+              <label for="editItemNotes">Notes:</label>
+              <input type="text" id="editItemNotes" />
+            </div>
+          </div>
+          <div class="modal-actions">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <button type="button" class="btn btn-secondary" id="cancelEdit">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- JavaScript Modules -->
+    <script src="js/dataManager.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/home.js"></script>
+    <script src="js/itemDetails.js"></script>
+    <script src="js/sales.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

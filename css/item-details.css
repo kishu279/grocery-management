@@ -1,0 +1,295 @@
+/* Item Details Page Styles */
+.details-container {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.details-sidebar {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 25px;
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+}
+
+.details-sidebar h3 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--light-color);
+}
+
+.category-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.category-item {
+    padding: 15px;
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    background: white;
+}
+
+.category-item:hover {
+    border-color: var(--secondary-color);
+    background: #f8f9ff;
+}
+
+.category-item.active {
+    border-color: var(--secondary-color);
+    background: var(--secondary-color);
+    color: white;
+}
+
+.category-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.category-count {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.details-main {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 30px;
+    min-height: 500px;
+}
+
+.item-details-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--light-color);
+    margin-bottom: 30px;
+}
+
+.category-title {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.category-summary {
+    display: flex;
+    gap: 30px;
+    color: var(--text-light);
+}
+
+.summary-item {
+    text-align: center;
+}
+
+.summary-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    display: block;
+}
+
+.summary-label {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.detail-item-card {
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    transition: var(--transition);
+    background: white;
+}
+
+.detail-item-card:hover {
+    border-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.detail-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.detail-item-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 0;
+    flex: 1;
+}
+
+.detail-item-price {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--success-color);
+    text-align: right;
+}
+
+.detail-item-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.info-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.info-value {
+    font-size: 1rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.detail-item-notes {
+    background: var(--light-color);
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-style: italic;
+    margin-top: 10px;
+}
+
+.detail-item-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Category-specific styling */
+.category-fruits .category-item.active { background: #27ae60; }
+.category-vegetables .category-item.active { background: #27ae60; }
+.category-dairy .category-item.active { background: #f39c12; }
+.category-meat .category-item.active { background: #e74c3c; }
+.category-bakery .category-item.active { background: #3498db; }
+.category-pantry .category-item.active { background: #9b59b6; }
+.category-beverages .category-item.active { background: #1abc9c; }
+.category-snacks .category-item.active { background: #e67e22; }
+.category-other .category-item.active { background: #95a5a6; }
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .details-container {
+        grid-template-columns: 250px 1fr;
+        gap: 20px;
+    }
+    
+    .items-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .details-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .details-sidebar {
+        position: static;
+        order: 2;
+    }
+    
+    .details-main {
+        order: 1;
+    }
+    
+    .category-list {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 10px;
+    }
+    
+    .category-item {
+        min-width: 150px;
+        text-align: center;
+    }
+    
+    .items-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .category-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .category-summary {
+        justify-content: center;
+    }
+    
+    .detail-item-info {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .details-sidebar,
+    .details-main {
+        margin: 0 -10px;
+        border-radius: 0;
+    }
+    
+    .category-list {
+        flex-direction: column;
+    }
+    
+    .category-item {
+        min-width: auto;
+    }
+    
+    .category-summary {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .detail-item-actions {
+        flex-direction: column;
+    }
+}
